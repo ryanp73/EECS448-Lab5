@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>Post Created</title>
+	<link rel="stylesheet" href="public/styles.css">
 </head>
 <body>
 	<div class="container">
+		<div id="home"><a href="AdminHome.html">Home</a></div>
 		<form action="CreatePosts.php" method="post">
 			<label for="username">Username</label><input type="text" name="username" id="username" required>
-			<label for="post">Message:</label><textarea name="post" id="post" cols="30" rows="10" required></textarea>
+			<label for="post">Message:</label><textarea name="content" id="post" cols="30" rows="10" required></textarea>
+			<input type="submit" value="Submit post!">
 		</form>
 	</div>
 </body>

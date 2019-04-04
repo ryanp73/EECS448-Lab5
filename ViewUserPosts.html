@@ -2,8 +2,7 @@
 
 include "DB.php";
 
-$stmt = $db->prepare("SELECT * FROM users");
-$result = $stmt->execute();
+$result = $db->query("SELECT * FROM users");
 
 ?>
 
@@ -11,12 +10,14 @@ $result = $stmt->execute();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>View User Posts</title>
+	<link rel="stylesheet" href="public/styles.css">
 </head>
 <body>
     <div class="container">
+		<div id="home"><a href="AdminHome.html">Home</a></div>
         <form action="ViewUserPosts.php" method="POST">
-            <select>
+            <select name="username">
                 <?php
                     while ($row = $result->fetch_assoc()) {
                             echo'<option value="' .  $row["user_id"] . '">' . $row["user_id"] . '</option>';

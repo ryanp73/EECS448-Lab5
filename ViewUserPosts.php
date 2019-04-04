@@ -2,18 +2,16 @@
 
 require("DB.php");
 
-function fetch_user_post($username)
+function fetch_user_post($db, $username)
 {
-    $stmt = $db->prepare("SELECT * FROM posts WHERE user_id = ?"); 
-    $stmt->bind_param("s", $username);
-    $result = $stmt->execute();
+  	$result = $db->query("SELECT * FROM posts WHERE author_id = {$username}"); 
 
     return $result;
 }
 
 $username = $_POST["username"];
 
-$result = fetch_user_post($username);
+$result = fetch_user_post($db, $username);
 
 ?>
 
@@ -21,17 +19,26 @@ $result = fetch_user_post($username);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>View User Posts</title>
+	<link rel="stylesheet" href="public/styles.css">
 </head>
 <body>
     <div class="container">
+		<div id="home"><a href="AdminHome.html">Home</a></div>
         <table>
             <?php
-                while ($row = $result->fetch_assoc()) {
-                    echo '<tr>';
-                        echo '<td>' . $row["user_id"] . '</td>';
-                    echo '</tr>';
-                }             
+				if ($result)
+				{
+					while ($row = $result->fetch_assoc()) {
+						echo '<tr>';
+							echo '<td>' . $row["content"] . '</td>';
+						echo '</tr>';
+					}             
+				}
+				else
+				{
+					echo "<tr><td><h1>No Posts Found</h1></td></tr>";
+				}
             ?>
         </table>        
     </div>

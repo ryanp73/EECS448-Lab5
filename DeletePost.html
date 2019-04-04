@@ -2,15 +2,13 @@
 
 require("DB.php");
 
-function fetch_all_posts()
+function fetch_all_posts($db)
 {
-    $stmt = $db->prepare("SELECT * FROM posts INNER JOIN users ON posts.user_id = users.author_id"); 
-    $result = $stmt->execute();
-
+    $result = $db->query("SELECT * FROM posts INNER JOIN users ON posts.author_id = users.user_id"); 
     return $result;
 }
 
-$result = fetch_all_posts(); 
+$result = fetch_all_posts($db); 
 
 ?>
 
@@ -18,10 +16,12 @@ $result = fetch_all_posts();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Delete Post</title>
+	<link rel="stylesheet" href="public/styles.css">
 </head>
 <body>
     <div class="container">
+		<div id="home"><a href="AdminHome.html">Home</a></div>
         <form action="DeletePost.php" method="post">
             <table>
                 <?php

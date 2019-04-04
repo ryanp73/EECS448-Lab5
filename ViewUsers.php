@@ -2,8 +2,7 @@
 
 require("DB.php");
 
-$stmt = $db->prepare("SELECT * FROM users");
-$result = $stmt->execute();
+$result = $db->query("SELECT * FROM users");
 
 ?>
 
@@ -11,10 +10,12 @@ $result = $stmt->execute();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>View Users</title>
+	<link rel="stylesheet" href="public/styles.css">
 </head>
 <body>
     <div class="container">
+		<div id="home"><a href="AdminHome.html">Home</a></div>
         <table>
             <?php
                 while ($row = $result->fetch_assoc()) {
