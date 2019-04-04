@@ -2,17 +2,17 @@
 
 include "DB.php";
 
-function delete_post($db, $post_id) {
+function delete_post($db, $post_id) 
+{
     return $db->query("DELETE FROM posts WHERE post_id = " . $post_id);
 }
 
 $post_ids = $_POST["posts"];
-var_dump($post_ids);
 
 $deleted_posts = [];
 
 foreach ($post_ids as $post_id) {
-    if (delete_post($db, $post_id) {
+    if (delete_post($db, $post_id)) {
         $deleted_posts[] = $post_id;
     } 
 }
