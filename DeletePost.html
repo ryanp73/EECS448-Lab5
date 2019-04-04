@@ -1,0 +1,41 @@
+<?php
+
+require("DB.php");
+
+function fetch_all_posts()
+{
+    $stmt = $db->prepare("SELECT * FROM posts INNER JOIN users ON posts.user_id = users.author_id"); 
+    $result = $stmt->execute();
+
+    return $result;
+}
+
+$result = fetch_all_posts(); 
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        <form action="DeletePost.php" method="post">
+            <table>
+                <?php
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<tr>';
+                            echo '<td><input type="checkbox" name="posts[]" value="' . $row["post_id"] . '"></td>';
+                            echo '<td>' . $row["author_id"] . '</td>';
+                            echo '<td>' . $row["content"] . '</td>';
+                        echo '</tr>';
+                    }             
+                ?>
+            </table>      
+            <input type="submit" value="Delete Selected Posts!">
+        </form>  
+    </div>
+</body>
+<
