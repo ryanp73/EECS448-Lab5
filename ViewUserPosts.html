@@ -1,0 +1,32 @@
+<?php
+
+include "DB.php";
+
+$stmt = $db->prepare("SELECT * FROM users");
+$result = $stmt->execute();
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        <form action="ViewUserPosts.php" method="POST">
+            <select>
+                <?php
+                    while ($row = $result->fetch_assoc()) {
+                            echo'<option value="' .  $row["user_id"] . '">' . $row["user_id"] . '</option>';
+                    }             
+                ?>
+            </select>        
+            <input type="submit" value="Get User Posts!">
+        </form>
+    </div>
+</body>
+</html>
+
+
